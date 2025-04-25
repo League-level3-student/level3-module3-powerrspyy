@@ -48,7 +48,7 @@ public class _01_StringMethods {
     // to underscores
     public static String formatSpaces(String s) {
         if(s.contains("underscores")) {
-        	s.replace(" ", "_");
+        	s = s.replace(" ", "_");
         }
         return s;
     }
@@ -78,50 +78,109 @@ public class _01_StringMethods {
     	}
         
         Collections.sort(strList, new MyCustomCompareClass());
-
-        return strList.get(0);
+        return strList.get(0).trim();
         
     }
 
     // Return the sum of all numerical digits in the String
     public static int numeralSum(String s) {
-        return 0;
+    	int sum = 0;
+        for(int i = 0; i < s.length(); i++) {
+        	if(Character.isDigit(s.charAt(i))) {
+        		sum += (int) s.charAt(i) - 48;
+        	}
+        }
+//        System.out.println(sum);
+        return sum;
     }
 
     // Return the number of times String substring appears in String s
     public static int substringCount(String s, String substring) {
-        return 0;
+        int amt = 0;
+        int sublen = substring.length();
+        for(int i = 0; i < s.length() - sublen + 1; i++) {
+        	if (substring.equals(s.substring(i, i + sublen))) {
+        		amt ++;
+        	}
+        }
+        return amt;
     }
 
     // Call Utilities.encrypt at the bottom of this file to encrypt String s
     public static String encrypt(String s, char key) {
-        return null;
+        return Utilities.encrypt(s.getBytes(), (byte) key);
     }
 
     // Call Utilities.decrypt at the bottom of this file to decrypt the
     // cyphertext (encrypted text)
     public static String decrypt(String s, char key) {
-        return null;
+        return Utilities.decrypt(s, (byte) key);
     }
 
     // Return the number of words in String s that end with String substring
     // You can assume there are no punctuation marks between words
     public static int wordsEndsWithSubstring(String s, String substring) {
-        return 0;
+        int amt = 0;
+        int sublen = substring.length();
+        String[] strs = s.trim().split(" ");
+        for(String str: strs) {
+        	int start = str.length() - sublen;
+        	if (start > -1) {
+        		if(substring.equals(str.substring(start, str.length()))) {
+        		amt ++;
+        		}
+        	}
+        	
+        }
+        return amt;
     }
 
     // Given String s, return the number of characters between the first
     // occurrence of String substring and the final occurrence
     // You can assume that substring will appear at least twice
     public static int distance(String s, String substring) {
-        return 0;
+    	int first_start = 0;
+    	int last_start = 0;
+    	int amt = 0;
+    	int sublen = substring.length();
+        for(int i = 0; i < s.length() - sublen + 1; i++) {
+        	if (substring.equals(s.substring(i, i + sublen))) {
+        		first_start = i;
+        		break;
+        	}
+        }
+        for(int end = s.length(); end > 0 + sublen; end--) {
+        	if (substring.equals(s.substring(end - sublen, end))) {
+        		last_start = end - sublen;
+        		break;
+        	}
+        }
+        return - first_start - sublen + last_start;
     }
 
     // Return true if String s is a palindrome
     // palindromes are words or phrases are read the same forward as backward.
     // HINT: ignore/remove all punctuation and spaces in the String
     public static boolean palindrome(String s) {
-        return true;
+    	s = s.toLowerCase();
+    	char[] chars = s.toCharArray();
+    	s = "";
+    	for(char c: chars) {
+    		if(Character.isAlphabetic(c)) {
+    			s += c;
+    		}
+    	}
+    	String reverse = "";
+    	char[] charList = s.toCharArray();
+    	for(int i = charList.length - 1; i >=0; i--) {
+    		reverse = reverse + charList[i];
+    	}
+    	System.out.println(reverse);
+    	System.out.println(s + "\n");
+        if(s.equals(reverse)) {
+        	return true;
+        }
+        return false;
     }
 }
 
