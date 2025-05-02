@@ -23,7 +23,12 @@ public class _01_TheWave {
     	StringBuilder builder = new StringBuilder(str);
         ArrayList<String> wave = new ArrayList<String>();
         for(int i = 0; i < str.length(); i ++) {
-        	builder.replace(i, i, "");
+        	
+        	char letter = builder.charAt(i);
+        	if (letter != ' '){
+        	builder.setCharAt(i, Character.toUpperCase(letter));
+        	wave.add(builder.toString());
+        	builder.setCharAt(i, letter);}
         }
 		return wave;
         

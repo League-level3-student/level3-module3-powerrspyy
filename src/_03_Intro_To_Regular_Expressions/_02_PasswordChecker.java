@@ -24,23 +24,23 @@ public class _02_PasswordChecker implements KeyListener {
     /*
      * 1. Check a minimum of 8 characters
      */
-    static final String regexCriteria1 = "";
+    static final String regexCriteria1 = ".{8,}";
 
     /*
      * 2. Check there is at least 1 number, i.e. a digit 0-9
      */
-    static final String regexCriteria2 = "";
+    static final String regexCriteria2 = "[0-9]";
 
     /*
      * 3. Check there is at least 1 capital letter
      */
-    static final String regexCriteria3 = "";
+    static final String regexCriteria3 = "[A-Z]";
 
     /*
      * 4. Check there is at least 1 special character, where special
      * characters are one of the following, @#$%^&-+=()
      */
-    static final String regexCriteria4 = "";
+    static final String regexCriteria4 = "[@#$%^&-+=()]";
     
     /*
      * *BONUS* Add more password criteria. Some suggestions are:
@@ -55,6 +55,7 @@ public class _02_PasswordChecker implements KeyListener {
      *  
      *  http://www.rexegg.com/regex-lookarounds.html#password
      */
+    static final String regexCriteria5 = "[^ ]";
     
     static final String INCORRECT = " X ";
     static final String CORRECT = " + ";
@@ -64,6 +65,7 @@ public class _02_PasswordChecker implements KeyListener {
     static final String CRITERIA2 = "Must contain at least 1 number";
     static final String CRITERIA3 = "Must contain at least 1 capital letter";
     static final String CRITERIA4 = "Must contain at least 1 special character";
+    static final String CRITERIA5 = "No spaces";
     static Font textFont = new Font( "Arial", Font.PLAIN, 18);
     JPasswordField passwordField;
     ArrayList<Criteria> criterias;
@@ -84,6 +86,7 @@ public class _02_PasswordChecker implements KeyListener {
         criterias.add(new Criteria(CRITERIA2, regexCriteria2, USE_FIND));
         criterias.add(new Criteria(CRITERIA3, regexCriteria3, USE_FIND));
         criterias.add(new Criteria(CRITERIA4, regexCriteria4, USE_FIND));
+        criterias.add(new Criteria(CRITERIA5, regexCriteria5, USE_FIND));
         
         panel.setLayout( new BoxLayout(panel, BoxLayout.Y_AXIS) );
         panel.setBorder(BorderFactory.createCompoundBorder( passwordField.getBorder(), 
